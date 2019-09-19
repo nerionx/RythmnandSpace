@@ -1,0 +1,6 @@
+Import enemy
+
+Class EnemyTypeBlank Extends Enemy
+''Blank enemy to avoid type errors
+
+End

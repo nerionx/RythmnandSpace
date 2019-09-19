@@ -1,0 +1,77 @@
+Import mojo.app
+Import mojo.graphics
+Import ship
+Import ticker
+Import settings
+Import background
+Import bullet
+Import enemytracker
+
+Class MyApp Extends App
+    field ship:Ship
+    field ticker:Ticker
+    field background:Background
+    field hasActioned:Bool
+    field bullet:Bullet
+    field enemytracker:EnemyTracker
+    field backgroundMusic:Sound
+    field musicPlaying:Bool = false
+
+    Method OnCreate()
+        SetUpdateRate(60)
+        Seed = Millisecs()
+        enemytracker = new EnemyTracker
+        background = new Background
+        ship = new Ship
+        ticker = new Ticker
+        bullet = new Bullet
+
+        ship.SetY(GAME_HEIGHT - SHIP_HEIGHT - 20)
+        ticker.SetTempo(160)
+        ticker.ticksound = LoadSound("tick.ogg")
+        backgroundMusic = LoadSound("music2.ogg")
+        background.GenerateStar(1,true)
+        enemytracker.Create()
+        
+    End
+
+    Method OnRender()
+        Cls(0,0,0)
+        background.Draw()
+        ship.Draw()
+        enemytracker.Draw()
+        bullet.Draw()
+    End
+
+    Method OnUpdate()
+    if musicPlaying = false then 
+        PlaySound(backgroundMusic,1,0)
+        musicPlaying = true
+    End
+        if KeyHit(KEY_LEFT) and ticker.ValidMove() and hasActioned = False then
+            ship.AddX(-SHIP_WIDTH)
+            hasActioned = True
+        End
+        if KeyHit(KEY_RIGHT) and ticker.ValidMove() and hasActioned = False then
+            ship.AddX(SHIP_WIDTH)
+            hasActioned = True
+        End
+
+        if KeyHit(KEY_SPACE) and ticker.ValidMove() and hasActioned = False then
+            bullet.Create(ship.GetX+SHIP_WIDTH/2,ship.GetY,True)
+            hasActioned = True
+        End
+        if ticker.Ticked() then
+            background.Tick()
+            hasActioned = False
+            enemytracker.NewEnemy("RED",120)
+            enemytracker.Update()
+        End
+        background.Update()
+        bullet.Update()
+    End
+End
+
+Function Main()
+    New MyApp
+End

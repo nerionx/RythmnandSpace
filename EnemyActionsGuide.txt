@@ -1,0 +1,7 @@
+NONE = Do nothing
+UP = Move Up the screen
+DOWN = Move down the screen
+LEFT = Move left across the screen
+RIGHT = Move right across the screen
+SHOOT = Shoot down towards the bottom of the screen
+DESTROY = Remove oneself

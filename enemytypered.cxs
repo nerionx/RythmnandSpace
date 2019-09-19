@@ -1,0 +1,28 @@
+Import enemy
+
+Class EnemyTypeRed Extends Enemy
+
+    Method SetPattern()
+        pattern[0] = "DOWN"
+        pattern[1] = "DOWN"
+        pattern[2] = "DOWN"
+        pattern[3] = "DOWN"
+        pattern[4] = "DOWN"
+        pattern[5] = "DOWN"
+        pattern[6] = "DOWN"
+        pattern[7] = "SHOOT"
+        pattern[8] = "LEFT"
+        pattern[9] = "LEFT"
+        pattern[10] = "LEFT"
+        pattern[11] = "LEFT"
+        pattern[12] = "LEFT"
+        pattern[13] = "LEFT"
+        pattern[14] = "LEFT"
+        pattern[15] = "DESTROY"
+    End
+
+    Method Draw()
+        SetColor(255,0,0)
+        DrawRect(x,y,30,30)
+    End
+End

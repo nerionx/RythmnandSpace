@@ -1,0 +1,42 @@
+Import mojo
+Import settings
+'This keeps track of the tempo'
+Class Ticker
+    field currentTime:int
+    field tickCount:int
+    field tempo:float
+    field leeway:float = ACTION_LEEWAY 'How much leeway we give the player in ms either side of the tick'
+    field ticksound:Sound
+
+    
+    'convert a BPM to a millisecond delay'
+    Method SetTempo(value:float)
+       tempo = (60000/value)
+       
+    End
+
+    Method Ticked:Bool()
+        if Millisecs() - currentTime > tempo then
+            currentTime = Millisecs()
+           '' PlaySound(ticksound,1,0)
+            return True
+        End
+        return False    
+    End
+
+    'Allow or Deny a move based on the ticker (give the player a little leeway with timing) true x ms either side of the tick'
+    Method ValidMove:Bool()
+        if Millisecs() - currentTime > tempo-leeway then
+            return True
+        End
+        if Millisecs()-currentTime < leeway then
+            return True
+        End
+
+        if Millisecs()-currentTime >= tempo then
+            return True
+        End
+
+        return False
+    End
+End

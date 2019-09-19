@@ -1,0 +1,37 @@
+Import mojo
+Import settings
+
+Class Ship
+    field x:int
+    field y:int
+    field newX:float
+    field newY:float
+    Method Draw()
+        SetColor(255,255,255)
+        DrawRect(x,y,SHIP_WIDTH,SHIP_HEIGHT)
+    End
+
+    Method SetX(value:float)
+        x = value
+    End
+
+    Method SetY(value:float)
+        y = value
+    End
+
+    Method GetX:int()
+        return x
+    End
+    Method GetY:int()
+        return y
+    End
+    Method AddX(value:float)
+        x += value
+        if x < 0 then x = 0
+        if x > 620 then x = 620
+    End
+
+
+    
+
+End

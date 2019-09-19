@@ -1,0 +1,37 @@
+Import settings
+import mojo
+
+Class Bullet
+    Field bulletX:Int[100]
+    Field bulletY:Int[100]
+    Field bulletDir:Bool[100]
+    Field nextBullet = 0
+    Method Create(x:Int,y:Int,goingUp:Bool)
+        bulletX[nextBullet] = x
+        bulletY[nextBullet] = y
+        bulletDir[nextBullet] = goingUp
+        nextBullet +=1
+        if nextBullet > 99 then nextBullet = 0
+    End
+
+    Method Draw()
+        for Local i = 0 to 99
+            if bulletY[i] < GAME_HEIGHT and bulletY[i] > 0 then
+                DrawRect(bulletX[i],bulletY[i],4,10);
+            End
+        next
+    End
+
+    Method Update()
+        for Local i = 0 to 99
+        if bulletY[i] < GAME_HEIGHT and bulletY[i] > 0 then 'Only update if the bullet is on the screen'
+            if bulletDir[i] = True then 
+                bulletY[i] -=5 
+            else 
+                bulletY[i] +=5 
+            End
+        End
+
+        next
+    End
+End

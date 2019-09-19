@@ -1,0 +1,56 @@
+'Abstract class for enemys'
+Import mojo
+
+Class Enemy
+    Field pattern:String[100]
+    Field x:Int
+    Field y:Int
+    Field currentTick:Int = 0
+    Field fireMode:int = 0
+    Field hasFired = False
+
+    Method Update:int()
+        Tick()    
+        if fireMode > 0 then
+            if Rnd(fireMode) = 1 then
+                'shoot'
+            End
+        End
+    End
+
+    Method Draw:int()
+    End
+
+    Method Tick:Int()
+        If pattern[currentTick]="UP" Then y -=30
+        If pattern[currentTick]="DOWN" Then y +=30
+        If pattern[currentTick]="LEFT" Then x -=30
+        If pattern[currentTick]="RIGHT" Then y +=30
+        If pattern[currentTick]="SHOOT" Then hasFired = True
+        currentTick +=1
+        If currentTick > 99 then currentTick = 0
+    End
+
+    Method SetPattern:int()
+        for Local i = 0 to 99
+            pattern[i]="NONE"
+        Next
+    End
+
+    Method SetX:Bool(value:Int)
+        x = value
+    End
+    
+    Method SetFireMode:int(value:int)
+        fireMode = value
+    End
+
+    Method HasFired:Bool()
+        if hasFired = True Then
+            hasFired = False
+            Return True
+        End
+        Return False
+    End
+
+End

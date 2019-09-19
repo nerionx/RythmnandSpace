@@ -1,0 +1,44 @@
+'Does the animated starfield effect'
+
+import mojo
+import settings
+
+Class Background
+    Field StarsX:Int[50]
+    Field StarsY:Int[50]
+    Field StarsDance:Int[50]
+
+    Method GenerateStar(id:int, fullscreen:Bool)
+        if fullscreen then
+            for Local i = 0 to 49
+                StarsX[i] = Rnd(GAME_WIDTH)
+                StarsY[i] = Rnd(GAME_HEIGHT)
+            next
+            return
+        End
+        StarsX[id] = Rnd(GAME_WIDTH)
+        StarsY[id] = 0
+    End
+
+    Method Update()
+        for Local i = 0 to 49
+            StarsY[i] += 1;
+            if StarsY[i] > GAME_HEIGHT then GenerateStar(i,false)
+        End
+    End
+
+    Method Draw()
+            SetColor(255,255,255)
+        'Iterate through all the stars and draw some of the bigger to animate them in time with the tick'
+        for Local i = 0 to 49
+            if StarsDance[i] = 0 then DrawOval(StarsX[i],StarsY[i],2,2)
+            if StarsDance[i] = 1 then DrawOval(StarsX[i],StarsY[i],4,4)    
+        next
+    End
+        'Decide which stars are going to animate with the tick at random'
+    Method Tick()
+        for Local i = 0 to 49
+            StarsDance[i] = Rnd(2)
+        End
+    End
+End

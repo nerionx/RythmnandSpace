@@ -1,0 +1,40 @@
+
+Import settings
+Import enemy
+'Enemy Types'
+Import enemytypeblank
+Import enemytypered
+
+Class EnemyTracker
+    Field enemy:Enemy[100]
+    Field currentEnemy:Int = 0
+
+    Method Create()
+        for Local i = 0 to 99
+            enemy[i] = new EnemyTypeBlank
+        Next
+    End
+    
+    Method Update()
+        for Local i = 0 to 99
+            enemy[i].Update()
+        Next
+    End
+
+    Method Draw()
+        for Local i = 0 to 99
+            enemy[i].Draw()
+        Next
+    End
+
+    
+    Method NewEnemy(value:String,xpos:Int)
+        if value = "RED" then
+            enemy[currentEnemy] = new EnemyTypeRed
+        End
+        enemy[currentEnemy].SetPattern()
+        enemy[currentEnemy].SetX = xpos
+        currentEnemy +=1
+        if currentEnemy > 99 then currentEnemy = 0
+    End
+End

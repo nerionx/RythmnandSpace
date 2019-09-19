@@ -1,0 +1,5 @@
+Global GAME_WIDTH = 720  'Width of the play field'
+Global GAME_HEIGHT = 1024 'height of the play field'
+Global SHIP_WIDTH = 40 'Width of the player ship'
+Global SHIP_HEIGHT = 40 'height of the plaeyr ship'
+Global ACTION_LEEWAY = 200 'How much time before and after the tick the player gets to move'
