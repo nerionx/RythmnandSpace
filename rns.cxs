@@ -1,5 +1,4 @@
-Import mojo.app
-Import mojo.graphics
+Import mojo
 Import ship
 Import ticker
 Import settings
